@@ -1,6 +1,8 @@
 import speech_recognition as sr
 from flask import Flask, request
 
+import os
+
 app = Flask(__name__)
 
 
@@ -30,16 +32,17 @@ def index():
 
 @app.route('/speech', methods=['POST'])
 def resolve():
-    if 'file' not in request.files:
-        return 'None'
-    else:
-        f = request.files['file']
-        f.save('audio.mp3')
-        text = speech2text('audio.mp3', lang='zh-cn', api='google')
-        return text
+    data = request.data
+    f = open('audio.wav', 'wb')
+
+    f.write(data)
+    f.close()
+    text = speech2text('audio.wav', lang='zh-cn', api='bing')
+    print text
+    return text
 
 
 if __name__ == "__main__":
-    # print(speech2text("1.mp3", api="google"))
-    # print(speech2text("1.mp3", api="bing"))
+    # print(speech2text("1.wav", api="google"))
+    # print(speech2text("audio.wav", api="bing"))
     app.run(host='0.0.0.0', port=8000, debug=True)

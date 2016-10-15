@@ -112,18 +112,22 @@
 <!-- socket.io -->
 <script src="./static/js/socket.io-1.4.5.js"></script>
 <script>
+  window.isFinish = true;
+
   var socket = io('http://localhost:8080');
   socket.on('change', function (data) {
     console.log(data);
 
     const obj = data[0];
 
-    if(obj.score < 40 || (window.obj && window.obj.name === obj.name)) {
+    if(obj.score < 40 ||
+      (window.obj && window.obj.name === obj.name)
+      || !window.isFinish) {
       return;
     }
 
     window.obj = obj;
-
+    window.isFinish = false;
 
 
     $('#pic_1').attr('src', './static/pics/' + data[0].picFileName);
@@ -154,6 +158,12 @@
       const audio = document.createElement("audio");
       audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=zh-cn&c=mp3&src=' + obj.name_cn;
       audio.play();
+
+      setTimeout(function () {
+        //开始录音
+        recordProcess();
+
+      }, 1000);
     }, 1500);
 
   });
@@ -162,40 +172,20 @@
 <!-- 语音 -->
 <script type="text/javascript" src="./static/js/recorder.js"></script>
 <script>
-getIdentificationProfileId();
-setTimeout(function () {
-  recordProcess();
-}, 3000);
-
-function getIdentificationProfileId() {
-  $.ajax({
-      url: "https://api.projectoxford.ai/spid/v1.0/identificationProfiles",
-      beforeSend: function(xhrObj){
-          // Request headers
-          xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","d5fb745f692c4817a50f1fc23d7ee31e");
-      },
-      type: "POST",
-      // Request body
-      data: '{"locale":"en-us"}',
-  })
-  .done(function(data) {
-      console.log(data);
-      window.identificationProfileId = data.identificationProfileId;
-  })
-  .fail(function(e) {
-      console.error(e);
-  });
-}
-
 window.score = 0;
 
+
 function check(text, flag) {
-  if(flag || (window.obj && window.obj.name && text === window.obj.name)) {
+  window.isFinish = true;
+
+  if(flag || (window.obj && window.obj.name &&
+    text.indexOf(window.obj.name_cn) >= 0
+    // text === window.obj.name_cn
+    )) {
     //right
     $('#check').text("正确！+10分");
     window.score += 10;
-    $('#score').text(window.score+"分");
+    $('#score').text("总分: "+window.score+"分");
 
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201504/5692.wav';
@@ -208,7 +198,7 @@ function check(text, flag) {
     if(window.score < 0) {
       window.score = 0;
     }
-    $('#score').text(window.score+"分");
+    $('#score').text("总分: "+window.score+"分");
 
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/files/download/sound/huang/cd9/wav/478.wav';
@@ -219,10 +209,11 @@ function check(text, flag) {
 
 function sendToFord(blobOrFile) {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/w', true);
+  xhr.open('POST', 'http://localhost:8000/speech', true);
   xhr.onload = function(e) {
-    console.log(e);
-    var result = e.target.result;
+    console.log(e.target.responseText);
+    var result = e.target.responseText;
+    check(result);
   };
 
   xhr.send(blobOrFile);
@@ -241,7 +232,7 @@ function recordProcess() {
     console.log('record stop');
 
     window.recorder.exportWAV(function(blob) {
-      // sendToFord(blob);
+      sendToFord(blob);
 
       var url = URL.createObjectURL(blob);
       var au = document.createElement('audio');
@@ -251,7 +242,7 @@ function recordProcess() {
     });
 
     window.recorder.clear();
-  }, 1500);
+  }, 3000);
 }
 
 </script>

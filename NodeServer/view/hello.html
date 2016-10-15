@@ -190,12 +190,17 @@ function getIdentificationProfileId() {
 
 window.score = 0;
 
-function check(text) {
-  if(text === window.obj.name) {
+function check(text, flag) {
+  if(flag || (window.obj && window.obj.name && text === window.obj.name)) {
     //right
     $('#check').text("正确！+10分");
     window.score += 10;
     $('#score').text(window.score+"分");
+
+    const audio = document.createElement("audio");
+    audio.src = 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201504/5692.wav';
+    audio.play();
+
   } else {
     //wrong
     $('#check').text("错误！-5分");
@@ -204,6 +209,11 @@ function check(text) {
       window.score = 0;
     }
     $('#score').text(window.score+"分");
+
+    const audio = document.createElement("audio");
+    audio.src = 'http://dx.sc.chinaz.com/files/download/sound/huang/cd9/wav/478.wav';
+    audio.play();
+
   }
 }
 
@@ -231,7 +241,7 @@ function recordProcess() {
     console.log('record stop');
 
     window.recorder.exportWAV(function(blob) {
-      sendToFord(blob);
+      // sendToFord(blob);
 
       var url = URL.createObjectURL(blob);
       var au = document.createElement('audio');

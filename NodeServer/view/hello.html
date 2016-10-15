@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    /*height: 100vh;*/
   }
   .cs-row {
     display: flex !important;
@@ -48,8 +48,15 @@
     margin-top: 0px;
   }
 </style>
+<div>
+  <center>
+    <h1 id="score">000分</h1>
+    <h3 id="check">正确！+10分</h3>
+  </center>
+</div>
+
 <div class="wrapper">
-    <div class="cs-row">
+  <div class="cs-row">
   <div class="cs-row-item">
     <center>
       <img src="./static/pics/apple.jpeg" id="pic_1" class="img-responsive img-thumbnail pic" width="350px">
@@ -100,6 +107,8 @@
 </div>
 </div>
 
+
+
 <!-- socket.io -->
 <script src="./static/js/socket.io-1.4.5.js"></script>
 <script>
@@ -109,9 +118,13 @@
 
     const obj = data[0];
 
-    if(obj.score < 40) {
+    if(obj.score < 40 || (window.obj && window.obj.name === obj.name)) {
       return;
     }
+
+    window.obj = obj;
+
+
 
     $('#pic_1').attr('src', './static/pics/' + data[0].picFileName);
     $('#name_en_1').text(data[0].name);
@@ -147,3 +160,114 @@
 </script>
 
 <!-- 语音 -->
+<script type="text/javascript" src="./static/js/recorder.js"></script>
+<script>
+getIdentificationProfileId();
+setTimeout(function () {
+  recordProcess();
+}, 3000);
+
+function getIdentificationProfileId() {
+  $.ajax({
+      url: "https://api.projectoxford.ai/spid/v1.0/identificationProfiles",
+      beforeSend: function(xhrObj){
+          // Request headers
+          xhrObj.setRequestHeader("Content-Type","application/json");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","d5fb745f692c4817a50f1fc23d7ee31e");
+      },
+      type: "POST",
+      // Request body
+      data: '{"locale":"en-us"}',
+  })
+  .done(function(data) {
+      console.log(data);
+      window.identificationProfileId = data.identificationProfileId;
+  })
+  .fail(function(e) {
+      console.error(e);
+  });
+}
+
+window.score = 0;
+
+function check(text) {
+  if(text === window.obj.name) {
+    //right
+    $('#check').text("正确！+10分");
+    window.score += 10;
+    $('#score').text(window.score+"分");
+  } else {
+    //wrong
+    $('#check').text("错误！-5分");
+    window.score -= 5;
+    if(window.score < 0) {
+      window.score = 0;
+    }
+    $('#score').text(window.score+"分");
+  }
+}
+
+function sendToFord(blobOrFile) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/w', true);
+  xhr.onload = function(e) {
+    console.log(e);
+    var result = e.target.result;
+  };
+
+  xhr.send(blobOrFile);
+}
+
+function initRecord(stream) {
+  var input = window.audio_context.createMediaStreamSource(stream);
+  window.recorder = new Recorder(input);
+}
+
+function recordProcess() {
+  window.recorder.record();
+  console.log('record start');
+  setTimeout(function () {
+    window.recorder.stop();
+    console.log('record stop');
+
+    window.recorder.exportWAV(function(blob) {
+      sendToFord(blob);
+
+      var url = URL.createObjectURL(blob);
+      var au = document.createElement('audio');
+
+      au.controls = true;
+      au.src = url;
+    });
+
+    window.recorder.clear();
+  }, 1500);
+}
+
+</script>
+
+<script>
+  function __log(e, data) {
+    // log.innerHTML += "\n" + e + " " + (data || '');
+    console.log(e + " " + (data || ''));
+  }
+
+  window.onload = function init() {
+    try {
+      // webkit shim
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+      window.URL = window.URL || window.webkitURL;
+
+      window.audio_context = new AudioContext;
+      __log('Audio context set up.');
+      __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+    } catch (e) {
+      alert('No web audio support in this browser!');
+    }
+
+    navigator.getUserMedia({audio: true}, initRecord, function(e) {
+      __log('No live audio input: ' + e);
+    });
+  };
+</script>

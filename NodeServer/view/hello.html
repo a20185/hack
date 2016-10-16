@@ -116,7 +116,7 @@
 
   var socket = io('http://localhost:8080');
   socket.on('change', function (data) {
-    console.log(data);
+    console.log(data[0]);
 
     const obj = data[0];
 
@@ -159,11 +159,13 @@
       audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=zh-cn&c=mp3&src=' + obj.name_cn;
       audio.play();
 
-      setTimeout(function () {
-        //开始录音
-        recordProcess();
+      const v = setInterval(function () {
+        if(audio.ended === true) {
+          clearInterval(v);
+          recordProcess();
+        }
+      }, 300);
 
-      }, 1000);
     }, 1500);
 
   });

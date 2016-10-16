@@ -1,3 +1,4 @@
 NodeServer/node_modules
 .DS_Store
 NodeServer/.DS_Store
+Speech/audio.wav

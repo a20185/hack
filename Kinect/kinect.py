@@ -41,6 +41,8 @@ def angle(vec_a, vec_b):
     c = b / a
     return math.atan2(c.imag, c.real)
 
+now_cnt = 0
+
 
 # pose1: 两手平直
 # pose2: 左手抬起
@@ -77,6 +79,8 @@ def check_pose1(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_
 
 def check_pose2(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right):
     angles = get_angles(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right)
+    if angles[0] < -0.2 and angles[1] < -2.4:
+        return True
     #if angles[0] < -math.pi * 0.65:
     #    return False
     #if angles[1] < math.pi * 0.8:
@@ -87,6 +91,8 @@ def check_pose2(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_
 
 def check_pose3(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right):
     angles = get_angles(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right)
+    if angles[0] > 2.4 and angles[1] > 0.2:
+        return True
     #if angles[0] > -math.pi * 0.8:
     #    return False
     #if angles[1] > math.pi * 0.65:
@@ -251,8 +257,8 @@ class BodyGameRuntime(object):
         tmp = jointPoints[PyKinectV2.JointType_HandRight]
         hand_right= Point(tmp.x, tmp.y)
         angles = get_angles(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right)
-        print("Pose %d, %f, %f" % (get_pose(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right), 
-              angles[0], angles[1]))
+        # print("Pose %d, %f, %f" % (get_pose(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right), 
+        #      angles[0], angles[1]))
 
     def draw_color_frame(self, frame, target_surface):
         target_surface.lock()
@@ -343,9 +349,6 @@ class BodyGameRuntime(object):
             self._screen.blit(surface_to_draw, (0, 0))
             surface_to_draw = None
 
-            font = pygame.font.Font(None, 60)
-            label = font.render('Save to screen.jpg', True, (255, 255, 255))
-            self._screen.blit(label, (100, 100))
             pygame.display.update()
 
             # --- Go ahead and update the screen with what we've drawn.

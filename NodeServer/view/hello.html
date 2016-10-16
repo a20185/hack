@@ -235,6 +235,9 @@ function recordProcess() {
 
     window.recorder.exportWAV(function(blob) {
       sendToFord(blob);
+      setTimeout(function () {
+        window.isFinish = true;
+      }, 5000);
 
       var url = URL.createObjectURL(blob);
       var au = document.createElement('audio');
@@ -244,7 +247,7 @@ function recordProcess() {
     });
 
     window.recorder.clear();
-  }, 3000);
+  }, 2000);
 }
 
 </script>

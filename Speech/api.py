@@ -37,8 +37,12 @@ def resolve():
 
     f.write(data)
     f.close()
-    text = speech2text('audio.wav', lang='zh-cn', api='bing')
-    print text
+    text = None
+    try:
+        text = speech2text('audio.wav', lang='zh-cn', api='bing')
+    except:
+        pass
+    print(text)
     return text
 
 

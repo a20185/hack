@@ -62,47 +62,8 @@
       <img src="./static/pics/apple.jpeg" id="pic_1" class="img-responsive img-thumbnail pic" width="350px">
       <h1 id="name_cn_1" class="name_cn">苹果</h1>
       <h3 id="name_en_1">apple</h3>
-      <h3 id="score_1">100</h3>
+      <!-- <h3 id="score_1">100</h3> -->
     </center>
-  </div>
-  <div class="cs-row-item">
-      <div class="cs-iitem">
-        <div class="row">
-          <div class="col-xs-6">
-            <img src="./static/pics/apple.jpeg" id="pic_2" class="img-responsive img-thumbnail pic" width="150px">
-          </div>
-          <div class="col-xs-6">
-            <h4 id="name_cn_2">苹果</h4>
-            <p id="name_en_2">apple</p>
-            <p id="score_2">100</p>
-          </div>
-        </div>
-      </div>
-      <div class="cs-iitem">
-        <div class="row">
-          <div class="col-xs-6">
-            <img src="./static/pics/apple.jpeg" id="pic_3" class="img-responsive img-thumbnail pic" width="150px">
-          </div>
-          <div class="col-xs-6">
-            <h4 id="name_cn_3">苹果</h4>
-            <p id="name_en_3">apple</p>
-            <p id="score_3">100</p>
-          </div>
-        </div>
-      </div>
-      <div class="cs-iitem">
-        <div class="row">
-          <div class="col-xs-6">
-            <img src="./static/pics/apple.jpeg" id="pic_4" class="img-responsive img-thumbnail pic" width="150px">
-          </div>
-          <div class="col-xs-6">
-            <h4 id="name_cn_4">苹果</h4>
-            <p id="name_en_4">apple</p>
-            <p id="score_4">100</p>
-          </div>
-        </div>
-      </div>
-
   </div>
 </div>
 </div>
@@ -114,15 +75,11 @@
 <script>
   window.isFinish = true;
 
-  var socket = io('http://localhost:8080');
+  window.socket = io('http://localhost:8080');
   socket.on('change', function (data) {
-    console.log(data[0]);
-
-    const obj = data[0];
-
-    if(obj.score < 40 ||
-      (window.obj && window.obj.name === obj.name)
-      || !window.isFinish) {
+    const obj = data;
+    console.log(data);
+    if(obj.score < 0 || !window.isFinish) {
       return;
     }
 
@@ -130,11 +87,11 @@
     window.isFinish = false;
 
 
-    $('#pic_1').attr('src', './static/pics/' + data[0].picFileName);
-    $('#name_en_1').text(data[0].name);
-    $('#name_cn_1').text(data[0].name_cn);
-    $('#score_1').text(data[0].score);
-
+    $('#pic_1').attr('src', './static/pics/' + data.picFileName);
+    $('#name_en_1').text(data.name);
+    $('#name_cn_1').text(data.name_cn);
+//    $('#score_1').text(data.score);
+/*
     $('#pic_2').attr('src', './static/pics/' + data[1].picFileName);
     $('#name_en_2').text(data[1].name);
     $('#name_cn_2').text(data[1].name_cn);
@@ -149,6 +106,7 @@
     $('#name_en_4').text(data[3].name);
     $('#name_cn_4').text(data[3].name_cn);
     $('#score_4').text(data[3].score);
+    */
 
     //音频
     const audio = document.createElement("audio");
@@ -156,7 +114,7 @@
     audio.play();
     setTimeout(function () {
       const audio = document.createElement("audio");
-      audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=zh-cn&c=mp3&src=' + obj.name_cn;
+      audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=zh-hk&c=mp3&src=' + obj.name_cn;
       audio.play();
 
       const v = setInterval(function () {
@@ -179,12 +137,25 @@ window.score = 0;
 
 function check(text, flag) {
   window.isFinish = true;
+  var tmpText = "";
+  for(var i = 0;i<text.length;i++){
+      var c = text[i]
+      if ('a'<=c && c<='z'){
+          c = c.toUpperCase();
+      }
+      if(c!=' '){
+          tmpText+=c;
+      }
+  }
+  text = tmpText;
+  console.log("format Text: "+text);
 
   if(flag || (window.obj && window.obj.name &&
     text.indexOf(window.obj.name_cn) >= 0
     // text === window.obj.name_cn
     )) {
     //right
+    console.log("正确");
     $('#check').text("正确！+10分");
     window.score += 10;
     $('#score').text("总分: "+window.score+"分");
@@ -192,7 +163,8 @@ function check(text, flag) {
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201504/5692.wav';
     audio.play();
-
+    //setTimeout(function(){
+    window.socket.emit("next",true);//},5000);
   } else {
     //wrong
     $('#check').text("错误！-5分");
@@ -205,7 +177,8 @@ function check(text, flag) {
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/files/download/sound/huang/cd9/wav/478.wav';
     audio.play();
-
+    //setTimeout(function(){
+    window.socket.emit("next",false);//},5000);
   }
 }
 
@@ -232,7 +205,6 @@ function recordProcess() {
   setTimeout(function () {
     window.recorder.stop();
     console.log('record stop');
-
     window.recorder.exportWAV(function(blob) {
       sendToFord(blob);
       setTimeout(function () {

@@ -1,0 +1,547 @@
+[
+  {
+    "name": "T-shirt",
+    "name_cn": "T恤",
+    "picFileName": "T-shirt.jpeg"
+  },
+  {
+    "name": "aeroplane",
+    "name_cn": "飞机",
+    "picFileName": "aeroplane.jpeg"
+  },
+  {
+    "name": "airport",
+    "name_cn": "机场",
+    "picFileName": "airport.jpeg"
+  },
+  {
+    "name": "park",
+    "name_cn": "公园",
+    "picFileName": "park.jpeg"
+  },
+  {
+    "name": "animal",
+    "name_cn": "动物",
+    "picFileName": "animal.jpeg"
+  },
+  {
+    "name": "architecture",
+    "name_cn": "建筑",
+    "picFileName": "architecture.jpeg"
+  },
+  {
+    "name": "art",
+    "name_cn": "艺术作品",
+    "picFileName": "art.jpeg"
+  },
+  {
+    "name": "child",
+    "name_cn": "小孩",
+    "picFileName": "child.jpeg"
+  },
+  {
+    "name": "banana",
+    "name_cn": "香蕉",
+    "picFileName": "banana.jpeg"
+  },
+  {
+    "name": "barbecue",
+    "name_cn": "烤肉",
+    "picFileName": "barbecue.jpeg"
+  },
+  {
+    "name": "basketball",
+    "name_cn": "篮球",
+    "picFileName": "basketball.jpeg"
+  },
+  {
+    "name": "beach",
+    "name_cn": "沙滩",
+    "picFileName": "beach.jpeg"
+  },
+  {
+    "name": "chair",
+    "name_cn": "椅子",
+    "picFileName": "chair.jpeg"
+  },
+  {
+    "name": "bicycle",
+    "name_cn": "自行车",
+    "picFileName": "bicycle.jpeg"
+  },
+  {
+    "name": "bird",
+    "name_cn": "鸟",
+    "picFileName": "bird.jpeg"
+  },
+  {
+    "name": "boat",
+    "name_cn": "船",
+    "picFileName": "boat.jpeg"
+  },
+  {
+    "name": "bowl",
+    "name_cn": "碗",
+    "picFileName": "bowl.jpeg"
+  },
+  {
+    "name": "bridge",
+    "name_cn": "桥",
+    "picFileName": "bridge.jpeg"
+  },
+  {
+    "name": "bus",
+    "name_cn": "巴士",
+    "picFileName": "bus.jpeg"
+  },
+  {
+    "name": "camping",
+    "name_cn": "校园",
+    "picFileName": "camping.jpeg"
+  },
+  {
+    "name": "car",
+    "name_cn": "车",
+    "picFileName": "car.jpeg"
+  },
+  {
+    "name": "cat",
+    "name_cn": "猫",
+    "picFileName": "cat.jpeg"
+  },
+  {
+    "name": "chocolate",
+    "name_cn": "巧克力",
+    "picFileName": "chocolate.jpeg"
+  },
+  {
+    "name": "city",
+    "name_cn": "城市",
+    "picFileName": "city.jpeg"
+  },
+  {
+    "name": "classroom",
+    "name_cn": "教室",
+    "picFileName": "classroom.jpeg"
+  },
+  {
+    "name": "cloud",
+    "name_cn": "云",
+    "picFileName": "cloud.jpeg"
+  },
+  {
+    "name": "computer",
+    "name_cn": "电脑",
+    "picFileName": "computer.jpeg"
+  },
+  {
+    "name": "conference",
+    "name_cn": "会议室",
+    "picFileName": "conference.jpeg"
+  },
+  {
+    "name": "coral",
+    "name_cn": "珊瑚",
+    "picFileName": "coral.jpeg"
+  },
+  {
+    "name": "crowd",
+    "name_cn": "人群",
+    "picFileName": "crowd.jpeg"
+  },
+  {
+    "name": "cup",
+    "name_cn": "杯子",
+    "picFileName": "cup.jpeg"
+  },
+  {
+    "name": "table",
+    "name_cn": "桌子",
+    "picFileName": "table.jpeg"
+  },
+  {
+    "name": "document",
+    "name_cn": "文档",
+    "picFileName": "document.jpeg"
+  },
+  {
+    "name": "dog",
+    "name_cn": "狗",
+    "picFileName": "dog.jpeg"
+  },
+  {
+    "name": "door",
+    "name_cn": "门",
+    "picFileName": "door.jpeg"
+  },
+  {
+    "name": "dress",
+    "name_cn": "连衣裙",
+    "picFileName": "dress.jpeg"
+  },
+  {
+    "name": "deer",
+    "name_cn": "鹿",
+    "picFileName": "deer.jpeg"
+  },
+  {
+    "name": "eyeglasses",
+    "name_cn": "眼镜",
+    "picFileName": "eyeglasses.jpeg"
+  },
+  {
+    "name": "family",
+    "name_cn": "一家人",
+    "picFileName": "family.jpeg"
+  },
+  {
+    "name": "fish",
+    "name_cn": "鱼",
+    "picFileName": "fish.jpeg"
+  },
+  {
+    "name": "flower",
+    "name_cn": "花",
+    "picFileName": "flower.jpeg"
+  },
+  {
+    "name": "food",
+    "name_cn": "食物",
+    "picFileName": "food.jpeg"
+  },
+  {
+    "name": "football",
+    "name_cn": "足球",
+    "picFileName": "football.jpeg"
+  },
+  {
+    "name": "fruit",
+    "name_cn": "水果",
+    "picFileName": "fruit.jpeg"
+  },
+  {
+    "name": "garden",
+    "name_cn": "花园",
+    "picFileName": "garden.jpeg"
+  },
+  {
+    "name": "grass",
+    "name_cn": "草坪",
+    "picFileName": "grass.jpeg"
+  },
+  {
+    "name": "grocery",
+    "name_cn": "食品店",
+    "picFileName": "grocery.jpeg"
+  },
+  {
+    "name": "harbor",
+    "name_cn": "港口",
+    "picFileName": "harbor.jpeg"
+  },
+  {
+    "name": "horse",
+    "name_cn": "马",
+    "picFileName": "horse.jpeg"
+  },
+  {
+    "name": "house",
+    "name_cn": "房子",
+    "picFileName": "house.jpeg"
+  },
+  {
+    "name": "map",
+    "name_cn": "地图",
+    "picFileName": "map.jpeg"
+  },
+  {
+    "name": "menu",
+    "name_cn": "菜单",
+    "picFileName": "menu.jpeg"
+  },
+  {
+    "name": "mountain",
+    "name_cn": "山",
+    "picFileName": "mountain.jpeg"
+  },
+  {
+    "name": "ocean",
+    "name_cn": "海洋",
+    "picFileName": "ocean.jpeg"
+  },
+  {
+    "name": "office",
+    "name_cn": "办公室",
+    "picFileName": "office.jpeg"
+  },
+  {
+    "name": "panda",
+    "name_cn": "熊猫",
+    "picFileName": "panda.jpeg"
+  },
+  {
+    "name": "pen",
+    "name_cn": "笔",
+    "picFileName": "pen.jpeg"
+  },
+  {
+    "name": "person",
+    "name_cn": "人",
+    "picFileName": "person.jpeg"
+  },
+  {
+    "name": "pizza",
+    "name_cn": "披萨",
+    "picFileName": "pizza.jpeg"
+  },
+  {
+    "name": "plant",
+    "name_cn": "植物",
+    "picFileName": "plant.jpeg"
+  },
+  {
+    "name": "restaurant",
+    "name_cn": "餐厅",
+    "picFileName": "restaurant.jpeg"
+  },
+  {
+    "name": "forest",
+    "name_cn": "森林",
+    "picFileName": "forest.jpeg"
+  },
+  {
+    "name": "river",
+    "name_cn": "河",
+    "picFileName": "river.jpeg"
+  },
+  {
+    "name": "screen",
+    "name_cn": "屏幕",
+    "picFileName": "screen.jpeg"
+  },
+  {
+    "name": "sky",
+    "name_cn": "天空",
+    "picFileName": "sky.jpeg"
+  },
+  {
+    "name": "stadium",
+    "name_cn": "体育场",
+    "picFileName": "stadium.jpeg"
+  },
+  {
+    "name": "statue",
+    "name_cn": "雕像",
+    "picFileName": "statue.jpeg"
+  },
+  {
+    "name": "street",
+    "name_cn": "街道",
+    "picFileName": "street.jpeg"
+  },
+  {
+    "name": "suit",
+    "name_cn": "衣服",
+    "picFileName": "suit.jpeg"
+  },
+  {
+    "name": "surfing",
+    "name_cn": "冲浪",
+    "picFileName": "surfing.jpeg"
+  },
+  {
+    "name": "swimming",
+    "name_cn": "游泳",
+    "picFileName": "swimming.jpeg"
+  },
+  {
+    "name": "train",
+    "name_cn": "火车",
+    "picFileName": "train.jpeg"
+  },
+  {
+    "name": "tree",
+    "name_cn": "树",
+    "picFileName": "tree.jpeg"
+  },
+  {
+    "name": "wedding",
+    "name_cn": "婚礼",
+    "picFileName": "wedding.jpeg"
+  },
+  {
+    "name": "female",
+    "name_cn": "女人",
+    "picFileName": "female.jpeg"
+  },
+  {
+    "name": "male",
+    "name_cn": "男人",
+    "picFileName": "male.jpeg"
+  },
+  {
+    "name": "zoo",
+    "name_cn": "动物园",
+    "picFileName": "zoo.jpeg"
+  },
+  {
+    "name": "apple",
+    "name_cn": "苹果",
+    "picFileName": "apple.jpeg"
+  },
+  {
+    "name": "background",
+    "name_cn": "背景",
+    "picFileName": "background.jpeg"
+  },
+  {
+    "name": "baseball",
+    "name_cn": "棒球",
+    "picFileName": "baseball.jpeg"
+  },
+  {
+    "name": "bear",
+    "name_cn": "熊",
+    "picFileName": "bear.jpeg"
+  },
+  {
+    "name": "book",
+    "name_cn": "书",
+    "picFileName": "book.jpeg"
+  },
+  {
+    "name": "bottle",
+    "name_cn": "瓶子",
+    "picFileName": "bottle.jpeg"
+  },
+  {
+    "name": "bread",
+    "name_cn": "面包",
+    "picFileName": "bread.jpeg"
+  },
+  {
+    "name": "camera",
+    "name_cn": "照相机",
+    "picFileName": "camera.jpeg"
+  },
+  {
+    "name": "coat",
+    "name_cn": "大衣",
+    "picFileName": "coat.jpeg"
+  },
+  {
+    "name": "drink",
+    "name_cn": "饮料",
+    "picFileName": "drink.jpeg"
+  },
+  {
+    "name": "elephant",
+    "name_cn": "大象",
+    "picFileName": "elephant.jpeg"
+  },
+  {
+    "name": "exhibition",
+    "name_cn": "展览",
+    "picFileName": "exhibition.jpeg"
+  },
+  {
+    "name": "giraffe",
+    "name_cn": "长颈鹿",
+    "picFileName": "giraffe.jpeg"
+  },
+  {
+    "name": "guitar",
+    "name_cn": "吉他",
+    "picFileName": "guitar.jpeg"
+  },
+  {
+    "name": "hotel",
+    "name_cn": "旅馆",
+    "picFileName": "hotel.jpeg"
+  },
+  {
+    "name": "kitchen",
+    "name_cn": "厨房",
+    "picFileName": "kitchen.jpeg"
+  },
+  {
+    "name": "lamp",
+    "name_cn": "灯",
+    "picFileName": "lamp.jpeg"
+  },
+  {
+    "name": "necklace",
+    "name_cn": "项链",
+    "picFileName": "necklace.jpeg"
+  },
+  {
+    "name": "painting",
+    "name_cn": "画",
+    "picFileName": "painting.jpeg"
+  },
+  {
+    "name": "shoes",
+    "name_cn": "鞋",
+    "picFileName": "shoes.jpeg"
+  },
+  {
+    "name": "snow",
+    "name_cn": "雪",
+    "picFileName": "snow.jpeg"
+  },
+  {
+    "name": "station",
+    "name_cn": "公交站",
+    "picFileName": "station.jpeg"
+  },
+  {
+    "name": "theatre",
+    "name_cn": "剧院",
+    "picFileName": "theatre.jpeg"
+  },
+  {
+    "name": "tiger",
+    "name_cn": "老虎",
+    "picFileName": "tiger.jpeg"
+  },
+  {
+    "name": "truck",
+    "name_cn": "卡车",
+    "picFileName": "truck.jpeg"
+  },
+  {
+    "name": "tv",
+    "name_cn": "电视",
+    "picFileName": "tv.jpeg"
+  },
+  {
+    "name": "window",
+    "name_cn": "窗",
+    "picFileName": "window.jpeg"
+  },
+  {
+    "name": "yard",
+    "name_cn": "庭院",
+    "picFileName": "yard.jpeg"
+  },
+  {
+    "name": "handbag",
+    "name_cn": "手提包",
+    "picFileName": "handbag.jpeg"
+  },
+  {
+    "name": "keyboard",
+    "name_cn": "键盘",
+    "picFileName": "keyboard.jpeg"
+  },
+  {
+    "name": "library",
+    "name_cn": "图书馆",
+    "picFileName": "library.jpeg"
+  },
+  {
+    "name": "academic robe",
+    "name_cn": "学士服",
+    "picFileName": "academic robe.jpeg"
+  }
+]

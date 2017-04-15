@@ -49,25 +49,40 @@ app.use(function* (next) {
 
 require('./controllers');
 
+var mode = 2;
 router.router.post('/change', function () {
   const body = JSON.parse(this.request.body.data);
-  io.emit('change', body.map((elm) => {
-    const tmp = objs[elm.tag];
-    tmp.score = elm.score;
-
-    return tmp;
-  }));
+  if(mode==1){
+      io.emit('change', body.map((elm) => {
+        const tmp = objs[elm.tag];
+        tmp.score = elm.score;
+        return tmp;
+      }));
+  } else {
+      console.log("123123123");
+  }
 });
+
 
 app.use(router.serverRouter);
 
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
+var index = 0;
 
 // socket.io
 io.on('connection', function (socket) {
-  console.log('one client connects.');
+    io.emit('change', objs[index]);
+    socket.on('next', function (res) {
+        console.log(res);
+        if(res) index++;
+        io.emit('change', objs[index]);
+    });
+    socket.on("asd",function(socket){
+        console.log("ASD");
+    })
 });
+
 
 //aiServer
 const aiServer = require('net').createServer(function (c) {

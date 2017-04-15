@@ -1,8 +1,9 @@
-from pykinect2 import PyKinectV2
-from pykinect2.PyKinectV2 import *
-from pykinect2 import PyKinectRuntime
-from queue import Queue
-from PIL import Image
+# coding=utf-8
+#from pykinect2 import PyKinectV2
+#from pykinect2.PyKinectV2 import *
+#from pykinect2 import PyKinectRuntime
+from Queue import Queue
+#from PIL import Image
 from io import BytesIO
 
 import ctypes
@@ -154,10 +155,10 @@ class BodyGameRuntime(object):
         self._clock = pygame.time.Clock()
 
         # Kinect runtime object, we want only color and body frames
-        self._kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color | PyKinectV2.FrameSourceTypes_Body)
+#        self._kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color | PyKinectV2.FrameSourceTypes_Body)
 
         # back buffer surface for getting Kinect color frames, 32bit color, width and height equal to the Kinect color frame size
-        self._frame_surface = pygame.Surface((self._kinect.color_frame_desc.Width, self._kinect.color_frame_desc.Height), 0, 32)
+ #       self._frame_surface = pygame.Surface((self._kinect.color_frame_desc.Width, self._kinect.color_frame_desc.Height), 0, 32)
 
         # here we will store skeleton data
         self._bodies = None
@@ -176,10 +177,10 @@ class BodyGameRuntime(object):
             result = json.loads(res.text)
             print(result)
 
-    def get_screen_size(self):
-        width = self._kinect.color_frame_desc.Width
-        height = self._kinect.color_frame_desc.Height
-        return width / 2, height / 2
+  #  def get_screen_size(self):
+#        width = self._kinect.color_frame_desc.Width
+ #       height = self._kinect.color_frame_desc.Height
+ #       return width / 2, height / 2
     
     def draw_body_bone(self, joints, jointPoints, color, joint0, joint1):
         joint0State = joints[joint0].TrackingState
@@ -204,8 +205,8 @@ class BodyGameRuntime(object):
 
     def draw_rect(self, color):
         try:
-            width = self._kinect.color_frame_desc.Width
-            height = self._kinect.color_frame_desc.Height
+            width = 30
+            height = 30
             rect = pygame.Rect(width / 4, height / 4, width / 2, height / 2)
             pygame.draw.rect(self._frame_surface, color, rect, 3)
         except:
@@ -259,21 +260,13 @@ class BodyGameRuntime(object):
         angles = get_angles(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right)
         # print("Pose %d, %f, %f" % (get_pose(shoulder_center, shoulder_left, shoulder_right, hand_left, hand_right), 
         #      angles[0], angles[1]))
-
-    def draw_color_frame(self, frame, target_surface):
-        target_surface.lock()
-        address = self._kinect.surface_as_array(target_surface.get_buffer())
-        ctypes.memmove(address, frame.ctypes.data, frame.size)
-        del address
-        target_surface.unlock()
-
     def save_capture(self, filename):
         sub_screen = self.get_capture()
         pygame.image.save(sub_screen, filename)
     
     def get_capture(self):
-        width = self._kinect.color_frame_desc.Width
-        height = self._kinect.color_frame_desc.Height
+        width = 30
+        height = 30
         rect = pygame.Rect(width / 4, height / 4, width / 2, height / 2)
         sub_screen = self._screen.subsurface(rect)
         return sub_screen
@@ -304,18 +297,7 @@ class BodyGameRuntime(object):
 
             # --- Getting frames and drawing
             # --- Woohoo! We've got a color frame! Let's fill out back buffer surface with frame's data
-            if self._kinect.has_new_color_frame():
-                frame = self._kinect.get_last_color_frame()
-                self.draw_color_frame(frame, self._frame_surface)
-                frame = None
-
             # --- Cool! We have a body frame, so can get skeletons
-            if self._kinect.has_new_body_frame():
-                self._bodies = self._kinect.get_last_body_frame()
-
-            # --- Draw rectangle
-            self.draw_rect(SKELETON_COLORS[0])
-
             try:
                 sub_screen = self.get_capture()
                 cnt += 1
@@ -329,25 +311,13 @@ class BodyGameRuntime(object):
             #res = requests.post(url, files=files)
             #print(res.text)
 
-            # --- draw skeletons to _frame_surface
-            if self._bodies is not None:
-                for i in range(0, self._kinect.max_body_count):
-                    body = self._bodies.bodies[i]
-                    if not body.is_tracked:
-                        continue
-
-                    joints = body.joints
-                    # convert joint coordinates to color space
-                    joint_points = self._kinect.body_joints_to_color_space(joints)
-                    self.draw_body(joints, joint_points, SKELETON_COLORS[i])
-
             # --- copy back buffer surface pixels to the screen, resize it if needed and keep aspect ratio
             # --- (screen size may be different from Kinect's color frame size)
-            h_to_w = float(self._frame_surface.get_height()) / self._frame_surface.get_width()
-            target_height = int(h_to_w * self._screen.get_width())
-            surface_to_draw = pygame.transform.scale(self._frame_surface, (self._screen.get_width(), target_height))
-            self._screen.blit(surface_to_draw, (0, 0))
-            surface_to_draw = None
+#            h_to_w = float(self._frame_surface.get_height()) / self._frame_surface.get_width()
+#            target_height = int(h_to_w * self._screen.get_width())
+#            surface_to_draw = pygame.transform.scale(self._frame_surface, (self._screen.get_width(), target_height))
+#            self._screen.blit(surface_to_draw, (0, 0))
+#            surface_to_draw = None
 
             pygame.display.update()
 

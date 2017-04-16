@@ -10,11 +10,6 @@
         "picFileName":"airport.jpeg"
     },
     {
-        "name":"park",
-        "name_cn":"公園",
-        "picFileName":"park.jpeg"
-    },
-    {
         "name":"animal",
         "name_cn":"動物",
         "picFileName":"animal.jpeg"
@@ -55,49 +50,20 @@
         "picFileName":"beach.jpeg"
     },
     {
-        "name":"chair",
-        "name_cn":"椅子",
-        "picFileName":"chair.jpeg"
-    },
-    {
         "name":"bicycle",
         "name_cn":"自行車",
         "picFileName":"bicycle.jpeg"
-    },
-    {
-        "name":"bird",
-        "name_cn":"鳥",
-        "picFileName":"bird.jpeg"
     },
     {
         "name":"boat",
         "name_cn":"船",
         "picFileName":"boat.jpeg"
     },
-    {
-        "name":"bowl",
-        "name_cn":"碗",
-        "picFileName":"bowl.jpeg"
-    },
+
     {
         "name":"bridge",
         "name_cn":"橋",
         "picFileName":"bridge.jpeg"
-    },
-    {
-        "name":"bus",
-        "name_cn":"巴士",
-        "picFileName":"bus.jpeg"
-    },
-    {
-        "name":"camping",
-        "name_cn":"校園",
-        "picFileName":"camping.jpeg"
-    },
-    {
-        "name":"car",
-        "name_cn":"車",
-        "picFileName":"car.jpeg"
     },
     {
         "name":"cat",

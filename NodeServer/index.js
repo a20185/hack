@@ -69,6 +69,7 @@ app.use(router.serverRouter);
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 var index = 0;
+//var index = 13;
 
 // socket.io
 io.on('connection', function (socket) {

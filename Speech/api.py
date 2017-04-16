@@ -21,8 +21,10 @@ def speech2text(filePath, lang="zh-cn", api="bing"):
     except sr.UnknownValueError:
         print(("Error: Microsoft Bing Voice Recognition could not"
                "understand audio"))
+        return 'null'
     except sr.RequestError as e:
         print("Error: Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
+        return 'null'
 
 
 @app.route('/')

@@ -74,10 +74,12 @@
 <script src="./static/js/socket.io-1.4.5.js"></script>
 <script>
   window.isFinish = true;
+  window.isWrong = false;
 
   window.socket = io('http://localhost:8080');
   socket.on('change', function (data) {
     const obj = data;
+    window.isWrong = false;
     console.log(data);
     if(obj.score < 0 || !window.isFinish) {
       return;
@@ -90,6 +92,7 @@
     $('#pic_1').attr('src', './static/pics/' + data.picFileName);
     $('#name_en_1').text(data.name);
     $('#name_cn_1').text(data.name_cn);
+    $("#name_cn_1").css("color","black");
 //    $('#score_1').text(data.score);
 /*
     $('#pic_2').attr('src', './static/pics/' + data[1].picFileName);
@@ -109,22 +112,17 @@
     */
 
     //音频
-    const audio = document.createElement("audio");
-    audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=en-gb&c=mp3&src=' + obj.name;
-    audio.play();
-    setTimeout(function () {
+//    const audio = document.createElement("audio");
+//    audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=en-gb&c=mp3&src=' + obj.name;
+ //   audio.play();
+  //  setTimeout(function () {
       const audio = document.createElement("audio");
       audio.src = 'http://www.voicerss.org/controls/speech.ashx?hl=zh-hk&c=mp3&src=' + obj.name_cn;
       audio.play();
-
-      const v = setInterval(function () {
-        if(audio.ended === true) {
-          clearInterval(v);
+        $(audio).bind('ended', function(){
           recordProcess();
-        }
-      }, 300);
-
-    }, 1500);
+        });
+   // }, 2000);
 
   });
 </script>
@@ -156,6 +154,7 @@ function check(text, flag) {
     )) {
     //right
     console.log("正确");
+    window.isWrong = false;
     $('#check').text("正确！+10分");
     window.score += 10;
     $('#score').text("总分: "+window.score+"分");
@@ -163,11 +162,13 @@ function check(text, flag) {
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/Files/DownLoad/sound1/201504/5692.wav';
     audio.play();
-    //setTimeout(function(){
-    window.socket.emit("next",true);//},5000);
+    setTimeout(function(){window.socket.emit("next",true);},2000);
   } else {
     //wrong
+    hasSend = false;
     $('#check').text("错误！-5分");
+    $("#name_cn_1").css("color","red");
+    window.isWrong = true;
     window.score -= 5;
     if(window.score < 0) {
       window.score = 0;
@@ -177,8 +178,7 @@ function check(text, flag) {
     const audio = document.createElement("audio");
     audio.src = 'http://dx.sc.chinaz.com/files/download/sound/huang/cd9/wav/478.wav';
     audio.play();
-    //setTimeout(function(){
-    window.socket.emit("next",false);//},5000);
+    setTimeout(function(){window.socket.emit("next",false);},5000);
   }
 }
 
@@ -190,7 +190,6 @@ function sendToFord(blobOrFile) {
     var result = e.target.responseText;
     check(result);
   };
-
   xhr.send(blobOrFile);
 }
 
@@ -201,27 +200,49 @@ function initRecord(stream) {
 
 function recordProcess() {
   window.recorder.record();
-  console.log('record start');
+  $("#name_cn_1").css("color","green");
   setTimeout(function () {
-    window.recorder.stop();
-    console.log('record stop');
+    $("#name_cn_1").css("color","black");
     window.recorder.exportWAV(function(blob) {
       sendToFord(blob);
       setTimeout(function () {
         window.isFinish = true;
-      }, 5000);
-
+        }, 5000);
       var url = URL.createObjectURL(blob);
       var au = document.createElement('audio');
-
       au.controls = true;
       au.src = url;
     });
-
     window.recorder.clear();
-  }, 2000);
+}, 3000);//录音时间
 }
 
+function stopRecord(){
+  $("#name_cn_1").css("color","black");
+  window.recorder.exportWAV(function(blob) {
+    sendToFord(blob);
+    setTimeout(function () {
+      window.isFinish = true;
+    }, 1000);
+    var url = URL.createObjectURL(blob);
+    var au = document.createElement('audio');
+    au.controls = true;
+    au.src = url;
+  });
+  window.recorder.clear();
+}
+// leapMotion
+Leap.loop(function(frame) {
+  frame.hands.forEach(function (hand, index) {
+    var radius;
+    if (hand.sphereRadius > 120) {
+      radius = 120;
+    } else {
+      radius = hand.sphereRadius;
+    }
+    $("#pic_1").css("width",(radius*10).toString()+'px');
+  });
+});
 </script>
 
 <script>
